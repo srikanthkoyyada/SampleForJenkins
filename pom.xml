@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.eureka</groupId>
-	<artifactId>EurekaServer1</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>EurekaServer</artifactId>
+	<version>1</version>
 	<packaging>jar</packaging>
 	<name>EurekaServer1</name>
 	<description>Eureka Server Instance- 1</description>
@@ -89,8 +89,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+				<configuration>
+                    <executable>true</executable>
+                    <finalName>${project.artifactId}</finalName>
+                </configuration>
+				</plugin>
 		</plugins>
+		
 	</build>
 
 </project>

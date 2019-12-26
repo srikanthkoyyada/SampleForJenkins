@@ -22,7 +22,7 @@ pipeline {
             steps {
                  sh 'cd /home/rknowsys/EurekaServerGIT/target/'
                  sh 'export BUILD_ID=dontKillMe'
-                 sh 'nohup java -Dserver.port=9000 -jar EurekaServer1-0.0.1-SNAPSHOT.jar &'
+                 sh 'nohup java -Dserver.port=9000 -jar EurekaServer.jar &'
          }
        }
    
