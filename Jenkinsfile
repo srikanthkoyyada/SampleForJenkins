@@ -17,7 +17,7 @@ pipeline {
                }
             }
    
-    stage('Deploy') {
+    stage('DeployJAR') {
        
             steps {
                  sh 'cd /home/rknowsys/EurekaServerGIT/target/'
