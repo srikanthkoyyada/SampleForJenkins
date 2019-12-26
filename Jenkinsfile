@@ -12,7 +12,7 @@ pipeline {
             steps {
            
             echo '-----------------build maven clean install----------------'
-            sh 'cd /home/rknowsys/EurekaServerGIT/EurekaServer1/'
+            sh 'cd /home/rknowsys/EurekaServerGIT/'
             sh 'mvn clean install'
                }
             }
@@ -20,7 +20,7 @@ pipeline {
     stage('Deploy') {
        
             steps {
-                 sh 'cd /home/rknowsys/EurekaServerGIT/EurekaServer1/target/'
+                 sh 'cd /home/rknowsys/EurekaServerGIT/target/'
                  sh 'export BUILD_ID=dontKillMe'
                  sh 'nohup java -Dserver.port=9000 -jar EurekaServer1-0.0.1-SNAPSHOT.jar &'
          }
