@@ -10,7 +10,7 @@ pipeline {
     stages {
             stage('SonarQube analysis') {
                  steps {
-         withSonarQubeEnv('My SonarQube Server') {
+         withSonarQubeEnv('SonarQube') {
               sh 'cd /usr/share/jenkins/EurekaServerGIT/'
              sh 'mvn clean package sonar:sonar'
          } // SonarQube taskId is automatically attached to the pipeline context
