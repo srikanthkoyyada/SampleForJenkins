@@ -3,16 +3,34 @@ pipeline {
         
         label {
             label "master"
-             customWorkspace "/home/rknowsys/EurekaServerGIT"
+             customWorkspace "/home/srikanthk/EurekaServerGIT"
               }
         }
      
     stages {
+    stage("SonarQube analysis") {
+          node {
+                echo '-----------------sonar analysis----------------'
+                sh 'cd /home/srikanthk/EurekaServerGIT/'
+              withSonarQubeEnv('My SonarQube Server') {
+                 sh 'mvn sonar:sonar'
+              }
+          }
+      }
+
+      stage("Quality Gate"){
+          timeout(time: 1, unit: 'HOURS') {
+              def qg = waitForQualityGate()
+              if (qg.status != 'OK') {
+                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
+              }
+          }
+      }
     stage('BuildAndPackage') { 
             steps {
            
             echo '-----------------build maven clean install----------------'
-            sh 'cd /home/rknowsys/EurekaServerGIT/'
+            sh 'cd /home/srikanthk/EurekaServerGIT/'
             sh 'mvn clean install'
                }
             }
@@ -20,9 +38,9 @@ pipeline {
     stage('DeployJAR') {
        
             steps {
-                 sh 'cd /home/rknowsys/EurekaServerGIT/target/'
+                 sh 'cd /home/srikanthk/EurekaServerGIT/target/'
                  sh 'export BUILD_ID=dontKillMe'
-                 sh 'nohup java -Dserver.port=9000 -jar EurekaServer.jar &'
+                 sh 'nohup java -Dserver.port=8000 -jar EurekaServer.jar &'
          }
        }
    
