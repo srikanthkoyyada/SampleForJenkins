@@ -18,15 +18,7 @@ pipeline {
             }
      
      
-    stage('BuildAndPackage') { 
-            steps {
-           
-            echo '-----------------build maven clean install----------------'
-            sh 'cd /usr/share/jenkins/EurekaServerGIT/'
-            sh 'mvn clean install'
-               }
-            }
-   
+    
     stage('DeployJAR') {
        
             steps {
