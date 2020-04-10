@@ -10,10 +10,11 @@ pipeline {
     stages {
             stage('SonarQube analysis') {
          withSonarQubeEnv('My SonarQube Server') {
+              sh 'cd /usr/share/jenkins/EurekaServerGIT/'
              sh 'mvn clean package sonar:sonar'
          } // SonarQube taskId is automatically attached to the pipeline context
        }
-     }
+     
      stage("Quality Gate"){
          timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
          def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
