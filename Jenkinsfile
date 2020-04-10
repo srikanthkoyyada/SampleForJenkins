@@ -8,14 +8,19 @@ pipeline {
         }
      
     stages {
-   stage('Sonar Analysis') { 
-            steps {
-           
-            echo '-----------------begin sonar analysis----------------'
-            sh 'cd /usr/share/jenkins/EurekaServerGIT/'
-            sh 'mvn sonar:sonar'
-               }
-            }
+            stage ("SonarQube analysis") {
+             steps {
+                withSonarQubeEnv('SonarQube') {
+                   s sh 'cd /usr/share/jenkins/EurekaServerGIT/'
+                      sh 'mvn sonar:sonar'
+                }
+
+                def qualitygate = waitForQualityGate()
+                if (qualitygate.status != "OK") {
+                   error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+                }
+             }
+          }
     stage('BuildAndPackage') { 
             steps {
            
