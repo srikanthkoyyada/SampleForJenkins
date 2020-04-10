@@ -11,7 +11,7 @@ pipeline {
             stage ("SonarQube analysis") {
              steps {
                 withSonarQubeEnv('SonarQube') {
-                   s sh 'cd /usr/share/jenkins/EurekaServerGIT/'
+                   sh 'cd /usr/share/jenkins/EurekaServerGIT/'
                       sh 'mvn sonar:sonar'
                 }
 
