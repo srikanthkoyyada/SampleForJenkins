@@ -3,7 +3,7 @@ pipeline {
         
         label {
             label "master"
-             customWorkspace "/home/srikanthk/EurekaServerGIT"
+             customWorkspace "/usr/share/jenkins/EurekaServerGIT"
               }
         }
      
@@ -13,7 +13,7 @@ pipeline {
             steps {
            
             echo '-----------------build maven clean install----------------'
-            sh 'cd /home/srikanthk/EurekaServerGIT/'
+            sh 'cd /usr/share/jenkins/EurekaServerGIT/'
             sh 'mvn clean install'
                }
             }
@@ -21,7 +21,7 @@ pipeline {
     stage('DeployJAR') {
        
             steps {
-                 sh 'cd /home/srikanthk/EurekaServerGIT/target/'
+                 sh 'cd /usr/share/jenkins/EurekaServerGIT/target/'
                  sh 'export BUILD_ID=dontKillMe'
                  sh 'nohup java -Dserver.port=8000 -jar EurekaServer.jar &'
          }
