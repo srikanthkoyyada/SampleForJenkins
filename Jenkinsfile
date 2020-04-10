@@ -9,7 +9,7 @@ pipeline {
      
     stages {
     stage("SonarQube analysis") {
-          node {
+          steps {
                 echo '-----------------sonar analysis----------------'
                 sh 'cd /home/srikanthk/EurekaServerGIT/'
               withSonarQubeEnv('My SonarQube Server') {
