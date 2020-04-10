@@ -23,7 +23,7 @@ pipeline {
             steps {
                  sh 'cd /usr/share/jenkins/EurekaServerGIT/target/'
                  sh 'export BUILD_ID=dontKillMe'
-                 sh 'sudo kill -9 $(sudo lsof -t -i:8000)'
+                 sh 'kill -9 $(lsof -t -i:8000)'
                  sh 'java -Dserver.port=8000 -jar EurekaServer.jar &'
          }
        }
