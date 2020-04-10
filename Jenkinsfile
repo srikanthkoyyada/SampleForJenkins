@@ -12,7 +12,7 @@ pipeline {
                  steps {
          withSonarQubeEnv('SonarQube') {
               sh 'cd /usr/share/jenkins/EurekaServerGIT/'
-             sh 'mvn clean package sonar:sonar'
+             sh 'mvn sonar:sonar'
          } // SonarQube taskId is automatically attached to the pipeline context
        }
             }
@@ -23,7 +23,7 @@ pipeline {
            
             echo '-----------------build maven clean install----------------'
             sh 'cd /usr/share/jenkins/EurekaServerGIT/'
-            sh 'mvn clean install'
+            sh 'mvn install'
                }
             }
    
