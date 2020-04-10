@@ -8,7 +8,14 @@ pipeline {
         }
      
     stages {
-   
+   stage('Sonar Analysis') { 
+            steps {
+           
+            echo '-----------------begin sonar analysis----------------'
+            sh 'cd /usr/share/jenkins/EurekaServerGIT/'
+            sh 'mvn sonar:sonar'
+               }
+            }
     stage('BuildAndPackage') { 
             steps {
            
