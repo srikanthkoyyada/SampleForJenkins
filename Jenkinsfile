@@ -45,15 +45,16 @@ pipeline{
               }	
             }	
             
-             post {
+                	     	         
+}
+ post {
 				 success {
 				 sendEmail("Successful")
 				 }
 				 failure {
 				 sendEmail("Failed")
 				 }
-				}       	     	         
-}
+				}   
 }
 
 @NonCPS
