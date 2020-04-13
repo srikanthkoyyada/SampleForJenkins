@@ -1,7 +1,14 @@
 
 pipeline{
 
-      
+	agent {
+		label {
+            label "master"
+             customWorkspace "/usr/share/jenkins/EurekaServerGIT"
+              }
+        }
+
+	}
         
         stages{
 
