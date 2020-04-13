@@ -18,13 +18,13 @@ pipeline{
 			       timeout(time: 1, unit: 'HOURS') {
 			      def qg = waitForQualityGate()
 				      if (qg.status != 'OK') {
-				      mail to:"srikanth.k@rknowsys.com", subject:"FAILURE: ${currentBuild.fullDisplayName},Changes:${CHANGES, showPaths=true, format="%a: %r %p \n--\"%m\"", pathFormat="\n\t- %p"}", body: "Sonar Analysis Failed."
+				      mail to:"srikanth.k@rknowsys.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Sonar Analysis Failed."
 					   error "Pipeline aborted due to quality gate failure: ${qg.status}"
 					   
 				      }
                     		}
 		    	    sh "mvn clean install"
-		    	    mail to:"srikanth.k@rknowsys.com", subject:"SUCCESS: ${currentBuild.fullDisplayName},Changes:${CHANGES, showPaths=true, format="%a: %r %p \n--\"%m\"", pathFormat="\n\t- %p"}", body: "Build Successfull"
+		    	    mail to:"srikanth.k@rknowsys.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Build Successfull"
 		      }
                  	
                	 }  
