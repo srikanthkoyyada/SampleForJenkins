@@ -1,33 +1,35 @@
-pipeline {
-     agent {
+
+pipeline{
+
+      agent {
+                docker {
+                image 'maven'
+                args '-v $HOME/.m2:/root/.m2'
+                }
+             }
+      
         
-        label {
-            label "master"
-             customWorkspace "/usr/share/jenkins/EurekaServerGIT"
-              }
-        }
-     
-    stages {
-            stage('SonarQube analysis') {
-                 steps {
-         withSonarQubeEnv('SonarQube') {
-              sh 'cd /usr/share/jenkins/EurekaServerGIT/'
-             sh 'mvn clean install sonar:sonar'
-         }
-       }
-            }
-     
-     
-    
-    stage('DeployJAR') {
-       
-            steps {
-                 sh 'cd /usr/share/jenkins/EurekaServerGIT/target/'
-                 sh 'java -Dserver.port=8000 -jar EurekaServer.jar &'
-         }
-       }
-   
-    }
-  
-  
+        stages{
+
+              stage('Quality Gate Status Check'){
+                  steps{
+                      script{
+			      withSonarQubeEnv('SonarQube') { 
+			      sh "mvn sonar:sonar"
+                       	     	}
+			      timeout(time: 1, unit: 'HOURS') {
+			      def qg = waitForQualityGate()
+				      if (qg.status != 'OK') {
+					   error "Pipeline aborted due to quality gate failure: ${qg.status}"
+				      }
+                    		}
+		    	    sh "mvn clean install"
+		  
+                 	}
+               	 }  
+              }	
+
+              
+		
+            }	       	     	         
 }
