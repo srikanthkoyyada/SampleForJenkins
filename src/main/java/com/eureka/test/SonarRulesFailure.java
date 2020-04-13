@@ -1,6 +1,6 @@
 package com.eureka.test;
 
-public class SonarRules {
+public class SonarRulesFailure {
 
 	StringBuffer buffer = new StringBuffer("Srikanth");
 
