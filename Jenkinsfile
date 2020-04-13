@@ -34,7 +34,10 @@ pipeline{
                       script{
 			                        		
 		    	    sh "mvn clean install"
-		    	    sh "java -Dserver.port=8000 -jar target/EurekaServer.jar &"
+		    	    withEnv(['JENKINS_NODE_COOKIE=DontKillMe']) {
+						     sh "java -Dserver.port=8000 -jar target/EurekaServer.jar &"
+						}
+		    	   
 		    	    mail to:"srikanth.k@rknowsys.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Build Successfull"
 		      }
                  	
