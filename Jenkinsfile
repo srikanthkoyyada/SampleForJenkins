@@ -24,8 +24,17 @@ pipeline{
 				      }
                     		}
                     		
+		    	   
+		      }
+                 	
+               	 }  
+              }	
+              stage('Build & Deploy'){
+                  steps{
+                      script{
+			                        		
 		    	    sh "mvn clean install"
-		    	    sh "pwd"
+		    	    sh "java -Dserver.port=8000 -jar target/EurekaServer.jar &"
 		    	    mail to:"srikanth.k@rknowsys.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Build Successfull"
 		      }
                  	
