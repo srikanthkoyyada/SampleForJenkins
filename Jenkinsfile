@@ -23,7 +23,9 @@ pipeline{
 					   
 				      }
                     		}
+                    		
 		    	    sh "mvn clean install"
+		    	    sh "pwd"
 		    	    mail to:"srikanth.k@rknowsys.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Build Successfull"
 		      }
                  	
