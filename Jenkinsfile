@@ -13,7 +13,7 @@ pipeline{
                   steps{
                       script{
 			      withSonarQubeEnv('SonarQube') { 
-			      sh "mvn sonar:sonar"
+			      sh "mvn sonar:sonar -Dsonar.exclusions=src/main/java/com/eureka/app/test/*.java"
                        	     	}
 			       timeout(time: 1, unit: 'HOURS') {
 			      def qg = waitForQualityGate()
