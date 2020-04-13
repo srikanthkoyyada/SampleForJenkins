@@ -19,6 +19,7 @@ pipeline{
 			      def qg = waitForQualityGate()
 				      if (qg.status != 'OK') {
 					   error "Pipeline aborted due to quality gate failure: ${qg.status}"
+					   mail to:"srikanth.k@rknowsys.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Sonar Analysis Failed."
 				      }
                     		}
 		    	    sh "mvn clean install"
