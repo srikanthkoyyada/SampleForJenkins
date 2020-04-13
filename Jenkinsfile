@@ -7,9 +7,6 @@ pipeline{
              customWorkspace "/usr/share/jenkins/EurekaServerGIT"
               }
         }
-
-	
-        
         stages{
 
               stage('Quality Gate Status Check'){
@@ -29,8 +26,5 @@ pipeline{
                  	
                	 }  
               }	
-
-              
-		
             }	       	     	         
 }
