@@ -16,8 +16,8 @@ pipeline{
                   steps{
                       script{
 			      withSonarQubeEnv('SonarQube') { 
-			     //sh "mvn sonar:sonar -Dsonar.exclusions=src/main/java/com/eureka/test/*.java"
-			      sh "mvn sonar:sonar"
+			     sh "mvn sonar:sonar -Dsonar.exclusions=src/main/java/com/eureka/test/*.java"
+			      //sh "mvn sonar:sonar"
                        	     	}
 			       timeout(time: 1, unit: 'HOURS') {
 			      def qg = waitForQualityGate()
@@ -47,7 +47,7 @@ pipeline{
             
                 	     	         
 }
- post {
+ 		post {
 				 success {
 				 sendEmail("Successful")
 				 }
