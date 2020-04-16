@@ -15,6 +15,7 @@ public class SonarRulesFailure {
 	try {
 	  conn = DriverManager.getConnection("jdbc:mysql://localhost/test?" +
 	        "user=steve&password=blue"); 
+	  
 	  String uname = getEncryptedUser();
 	  String password = getEncryptedPassword();
 	  conn = DriverManager.getConnection("jdbc:mysql://localhost/test?" +
