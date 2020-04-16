@@ -14,11 +14,11 @@ public class SonarRulesFailure {
 	Connection conn = null;
 	try {
 	  conn = DriverManager.getConnection("jdbc:mysql://localhost/test?" +
-	        "user=steve&password=blue"); // Noncompliant
-	  String uname = "steve";
-	  String password = "blue";
+	        "user=steve&password=blue"); 
+	  String uname = getEncryptedUser();
+	  String password = getEncryptedPassword();
 	  conn = DriverManager.getConnection("jdbc:mysql://localhost/test?" +
-	        "user=" + uname + "&password=" + password); // Noncompliant
+	        "user=" + uname + "&password=" + password); 
 
 	  java.net.PasswordAuthentication pa = new java.net.PasswordAuthentication("userName", "1234".toCharArray());  
 	  
@@ -26,6 +26,14 @@ public class SonarRulesFailure {
 	catch(SQLException exception) {
 		System.out.println(exception.getMessage());
 	}
+	}
+	
+	private String getEncryptedUser() {
+		return "user";
+	}
+	
+	private String getEncryptedPassword() {
+		return "password";
 	}
 
 }
